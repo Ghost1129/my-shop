@@ -1,0 +1,22 @@
+@use '../components/logo'
+@import '../abstract/breakpoint'
+
+
+
+
+  
+    
+    
+.Home_Container
+    height: 100vh
+    width: 100vw
+    background: url('../../assets/home.jpg') 
+    background-size: cover
+    background-position: center
+    background-repeat: no-repeat
+    position: relative
+    @include xs-breakpoint
+        padding-top: 6rem
+
+    @include sm-breakpoint
+        padding-top: 8rem
