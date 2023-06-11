@@ -1,19 +1,29 @@
 import '../scss/components/_accordian.sass'
 import { RxCaretDown } from 'react-icons/rx'
+import Star from './Star';
+import React, { useState } from 'react';
 
 
 interface Option {
   name: string;
-  value: string;
+  value: string ;
 }
 
 interface BrandProps {
   name: string;
   options: Option[];
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<any>>;
   }
 
   interface AccordianProps {
     type: string
+  }
+
+  interface StarProps {
+    count: number[];
+    open: boolean
+    setOpen: React.Dispatch<React.SetStateAction<any>>;
   }
   interface Data {
     brand: {
@@ -30,54 +40,70 @@ interface BrandProps {
         value: string;
       }[];
     };
-    rating: {
-      name: string;
-      options: number[];
-    };
   }
 
 
 
 
 
-const Brand = (prop:BrandProps) => 
-<>
-<div className="Accordian_header">
-        <span>{prop.name}</span>
+const Brand = ({name,options,open,setOpen}:BrandProps) => 
+{
+  return(
+    <>
+<div onClick={()=>setOpen(!open)} className="Accordian_header">
+        <span>{name}</span>
         <RxCaretDown size={18} />
   </div>
-      <div className="Accordian_body">
-        <ul>
-          <li>
-            <input type="checkbox" name="" id="" />
-            <label htmlFor="">Apple</label>
-          </li>
-        </ul>
-  </div>
+      {
+        open &&
+        <div className="Accordian_body">
+          <ul>
+            {options.map((option, i) => (
+              <li>
+                <input type="checkbox" name="" id="" />
+                <label htmlFor="">{option.name}</label>
+              </li>
+            ))
+          }
+          </ul>
+        </div>
+      }
 
 </>
+  )
+}
 
-const Stars= () =>
-  <>
-    <div className="Accordian_header">
+const Stars= ({count,open,setOpen}:StarProps) =>{
+
+  return(
+    <>
+    <div onClick={()=>setOpen(!open)} className="Accordian_header">
             <span>Rating</span>
             <RxCaretDown size={18} />
       </div>
-          <div className="Accordian_body">
+          {
+            open && <div className="Accordian_body">
             <ul>
-              <li>
-                <input type="checkbox" name="" id="" />
-                <label htmlFor="">Apple</label>
-              </li>
+              {
+                count.map((option, i) => (
+                  <li key={i}>
+                    <input type="checkbox" name="" id="" />
+                    <Star rating={option} />
+                  </li>
+                ))
+              }
             </ul>
-      </div>
-  
+          </div>
+
+          }
   </>
+  )
+}
 
 
 
-const Accordian = (props:AccordianProps) => {
-  const {type} = props
+const Accordian = ({type}:AccordianProps) => {
+  const [open, setOpen] = useState(true)
   const data ={
     "brand":{
       name: 'Brand',
@@ -107,35 +133,14 @@ const Accordian = (props:AccordianProps) => {
     },
     "rating":{
       name: 'Ratings',
-      options: [
-        {
-          name: '5',
-          value: '5'
-        },
-        {
-          name: '4',
-          value: '4'
-        },
-        {
-          name: '3',
-          value: '3'
-        },
-        {
-          name: '2',
-          value: '2'
-        },{
-          name: '1',
-          value: '1'
-        }
-      ]
     }
   }
-
+  const rating = [5,4,3,2,1]
 
   return (
     <div className='Accordian'>
            {
-              data[type as keyof Data].name === 'Rating' ? <Stars  /> : <Brand name={data[type as keyof Data].name} options={data[type as keyof Data].options} />
+              data[type as keyof Data].name === 'Ratings' ? <Stars setOpen={setOpen} open={open} count={rating} /> : <Brand setOpen={setOpen} open={open} name={data[type as keyof Data].name} options={data[type as keyof Data].options} />
            }
       </div>
   )
