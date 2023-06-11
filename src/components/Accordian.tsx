@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 
 interface Option {
   name: string;
-  value: string ;
+  value: number ;
 }
 
 interface BrandProps {
@@ -14,16 +14,22 @@ interface BrandProps {
   options: Option[];
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<any>>;
+  min?: React.Dispatch<React.SetStateAction<number>>;
+  max?: React.Dispatch<React.SetStateAction<number>>;
   }
 
   interface AccordianProps {
     type: string
+    min?: React.Dispatch<React.SetStateAction<number>>;
+    max?: React.Dispatch<React.SetStateAction<number>>;
+    rate?: React.Dispatch<React.SetStateAction<number>>;
   }
 
   interface StarProps {
     count: number[];
     open: boolean
     setOpen: React.Dispatch<React.SetStateAction<any>>;
+    rate?: React.Dispatch<React.SetStateAction<number>>;
   }
   interface Data {
     brand: {
@@ -37,7 +43,7 @@ interface BrandProps {
       name: string;
       options: {
         name: string;
-        value: string;
+        value: number
       }[];
     };
   }
@@ -46,8 +52,27 @@ interface BrandProps {
 
 
 
-const Brand = ({name,options,open,setOpen}:BrandProps) => 
+const Brand = ({name,options,min,max,open,setOpen}:BrandProps) => 
 {
+  const [checked, setChecked] = useState(-1)
+
+  const handleClicked = (option: number) => {
+
+    if (checked === option) {
+      setChecked(-1)
+      min!(0)
+      max!(10000)
+      return
+    }
+    setChecked(option)
+    if(option<501){
+      min!(option)
+    }
+    else{
+      min!(500)
+      max!(option)
+    }
+  }
   return(
     <>
 <div onClick={()=>setOpen(!open)} className="Accordian_header">
@@ -57,7 +82,9 @@ const Brand = ({name,options,open,setOpen}:BrandProps) =>
       {
         open &&
         <div className="Accordian_body">
-          <ul>
+          {
+            name === 'Brand' ?<>
+            <ul>
             {options.map((option, i) => (
               <li>
                 <input type="checkbox" name="" id="" />
@@ -66,6 +93,20 @@ const Brand = ({name,options,open,setOpen}:BrandProps) =>
             ))
           }
           </ul>
+            </>:<>
+            <ul>
+            {options.map((option, i) => (
+              <li>
+                <input checked={checked === option.value}
+                  onChange={() => handleClicked(option.value)}
+                 type="checkbox" name="" id="" />
+                <label htmlFor="">{option.name}</label>
+              </li>
+            ))
+          }
+          </ul>
+            </>
+          }
         </div>
       }
 
@@ -73,13 +114,25 @@ const Brand = ({name,options,open,setOpen}:BrandProps) =>
   )
 }
 
-const Stars= ({count,open,setOpen}:StarProps) =>{
+const Stars= ({count,open,rate,setOpen}:StarProps) =>{
+  const [checked, setChecked] = useState(-1)
+
+  const handleClicked = (option: number) => {
+    if (checked === option) {
+      setChecked(-1)
+      return
+    }
+    setChecked(option)
+    rate!(option)
+
+  }
 
   return(
     <>
     <div onClick={()=>setOpen(!open)} className="Accordian_header">
             <span>Rating</span>
             <RxCaretDown size={18} />
+
       </div>
           {
             open && <div className="Accordian_body">
@@ -87,7 +140,11 @@ const Stars= ({count,open,setOpen}:StarProps) =>{
               {
                 count.map((option, i) => (
                   <li key={i}>
-                    <input type="checkbox" name="" id="" />
+                    <input type="checkbox"
+                      value={option}
+                      checked={checked === option}
+                      onChange={() => handleClicked(option)}
+                     name="" id="" />
                     <Star rating={option} />
                   </li>
                 ))
@@ -102,7 +159,8 @@ const Stars= ({count,open,setOpen}:StarProps) =>{
 
 
 
-const Accordian = ({type}:AccordianProps) => {
+const Accordian = ({min,max,rate,type}:AccordianProps) => {
+  console.log(min,'min')
   const [open, setOpen] = useState(true)
   const data ={
     "brand":{
@@ -110,11 +168,11 @@ const Accordian = ({type}:AccordianProps) => {
       options: [
       {
         name: 'Mango',
-        value: 'mango'
+        value: 1
       },
       {
         name: 'H&M',
-        value: 'hnm'
+        value: 2
       }
     ]
     },
@@ -123,11 +181,11 @@ const Accordian = ({type}:AccordianProps) => {
       options: [
         {
           name: 'Under 500',
-          value: '500'
+          value: 500
         },
         {
           name: '500 - 1000',
-          value: '1000'
+          value: 1000
         }
       ]
     },
@@ -140,7 +198,7 @@ const Accordian = ({type}:AccordianProps) => {
   return (
     <div className='Accordian'>
            {
-              data[type as keyof Data].name === 'Ratings' ? <Stars setOpen={setOpen} open={open} count={rating} /> : <Brand setOpen={setOpen} open={open} name={data[type as keyof Data].name} options={data[type as keyof Data].options} />
+              data[type as keyof Data].name === 'Ratings' ? <Stars rate={rate} setOpen={setOpen} open={open} count={rating} /> : <Brand min={min} max={max} setOpen={setOpen} open={open} name={data[type as keyof Data].name} options={data[type as keyof Data].options} />
            }
       </div>
   )
