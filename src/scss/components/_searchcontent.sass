@@ -2,15 +2,109 @@
     overflow-y: scroll
     height: 100%
     width: 100%
-    padding: 1rem
+    padding: 4rem
+    margin-bottom:  20rem
 
     .Content_Inner
         display: flex
         flex-wrap: wrap
-        gap: 1.6rem
+        gap: 4rem
+        width: 100%
+        height: 100%
+        justify-content: center
+        max-height: 100%
+       
+       
+        
 
 .product_container
-    img
+    max-width: 12rem
+    height: 24rem
+    position: relative
+    cursor: pointer
+    background: red
+
+    .product_image
+        width: 100%
+        height: 70%
+        border-radius: 0.4rem
+        margin-bottom: 0.5rem
+        position: relative
+        overflow: hidden
+        user-select: none
+
+        img
+            width: 100%
+            height: 100%
+            object-fit: cover
+            border-radius: 0.4rem
+
+        .product_hover
+            position: absolute
+            bottom: 0
+            left: 0
+            width: 100%
+            height: 3rem
+            text-align: center
+            color: rgb(255, 255, 255)
+            background: rgba(125, 201, 242, 0.5)
+            z-index: 10
+            display: none
+            justify-content: center
+            align-items: center
+            font-size: 1rem
+
+    .product_like
+        position: absolute
+        top: 0.5rem
+        right: 0.5rem
+        color: rgb(255, 255, 255)
+
+    .red
+        color: rgb(255, 0, 0)
+
+    &:hover
+        .product_hover
+            display: flex
+
 
 .product_details
+    display: flex
+    flex-direction: column
+    gap: 0.4rem
+    justify-content: space-between
     
+    h3
+        font-size: 1.3rem
+        font-weight: 400
+        margin: 0rem 0
+        color: rgb(0, 0, 0)
+
+.product_cost
+    .product_price
+        position: relative
+        color: rgb(75, 75, 75)
+
+
+        &::after
+            left: 0
+            top: 50%
+            content: ''
+            position: absolute
+            width: 100%
+            height: 0.1rem
+            background: rgb(75, 75, 75)
+            
+    
+    .product_discount
+        color: rgb(35, 97, 252)
+        font-size: 1.2rem
+        font-weight: 500
+        margin-left: 0.5rem
+
+
+.product_rating
+    display: flex
+    gap: 0.2rem
+    align-items: center
+    font-size: 0.7rem
