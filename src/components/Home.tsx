@@ -6,8 +6,8 @@ import Search from './Search'
 const Home = () => {
   return (
     <div className='Home_Container'>
-      <span className='Logo'>zevi</span>
-        <Search />
+      <span className='Logo'>ZEVI</span>
+        <Search size='' />
     </div>
   )
 }
