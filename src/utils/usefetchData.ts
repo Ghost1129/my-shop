@@ -1,5 +1,4 @@
 import { faker } from '@faker-js/faker';
-import { type } from 'os';
 
 
 type Product = {

@@ -2,15 +2,20 @@ import React from 'react'
 import TrendImage from './TrendImage'
 import '../scss/components/_search.sass'
 import { faker } from '@faker-js/faker';
+import {useNavigate } from 'react-router-dom';
 
 const TrendContainer = () => {
+    const navigate = useNavigate()
+    const handleRoute = () => {
+        navigate('/store')
+    }
   return (
     <div className='Content_Container'>
             <div className='Content_Inner'>
                 <h3>
                     Latest Trends
                 </h3>
-                <div className='Content_Trends'>
+                <div onClick={()=>handleRoute()} className='Content_Trends'>
                     <TrendImage/>
                     <TrendImage/>
                     <TrendImage/>
@@ -22,7 +27,7 @@ const TrendContainer = () => {
                     <ul>
                         {
                             [...Array(5)].map((index) => (
-                                <li key={index}>{faker.commerce.productName()}</li>
+                                <li onClick={()=>handleRoute()}  key={index}>{faker.commerce.productName()}</li>
 
                             ))
                         }
