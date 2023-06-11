@@ -51,7 +51,7 @@ interface BrandProps {
 
 
 
-
+// Brand And Price component
 const Brand = ({name,options,min,max,open,setOpen}:BrandProps) => 
 {
   const [checked, setChecked] = useState(-1)
@@ -114,6 +114,8 @@ const Brand = ({name,options,min,max,open,setOpen}:BrandProps) =>
   )
 }
 
+
+// Stars component
 const Stars= ({count,open,rate,setOpen}:StarProps) =>{
   const [checked, setChecked] = useState(-1)
 
@@ -160,7 +162,6 @@ const Stars= ({count,open,rate,setOpen}:StarProps) =>{
 
 
 const Accordian = ({min,max,rate,type}:AccordianProps) => {
-  console.log(min,'min')
   const [open, setOpen] = useState(true)
   const data ={
     "brand":{

@@ -1,9 +1,5 @@
-import React, { useEffect, useState } from 'react'
-
+import { useEffect, useState } from 'react'
 import '../scss/components/_searchcontent.sass'
-import Star from './Star'
-import img1 from '../assets/t1.jpeg'
-
 import usefetchData from '../utils/usefetchData'
 import Product from './Product'
 
@@ -13,10 +9,9 @@ interface SearchContentProps {
   rate: number;
 }
 
-
 const SearchContent = ({min,max,rate}:SearchContentProps) => {
   
-  const [data, setData] = useState(usefetchData())
+  const [data] = useState(usefetchData())
   const [filteredData, setFilteredData] = useState(data)
   
   
