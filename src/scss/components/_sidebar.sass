@@ -1,0 +1,20 @@
+@import '../abstract/breakpoint'
+    
+.Sidebar_Container
+    
+    padding: 0 0.1rem
+    
+    @include sm-breakpoint
+        padding: 0 1rem
+
+    h3
+
+        font-size: 1.2rem
+        font-weight: 400
+        margin: 0rem 0
+        color: rgb(0, 0, 0)
+        @include sm-breakpoint
+            font-size: 1.4rem
+        
+        @include md-breakpoint
+            font-size: 1.8rem

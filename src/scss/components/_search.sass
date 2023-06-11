@@ -4,16 +4,17 @@
 .Search_Container1
     background: rgb(255, 255, 255)
     max-width: 36rem
-   
     display: flex
     align-items: center
     border-radius: 1rem
     justify-content: space-between
     margin: 0 auto
+    cursor: pointer
     
     input
         border: none
         outline: none
+        width: 100%
         margin: 1rem 2rem
         font-size: 1.2rem
     span
@@ -24,6 +25,15 @@
         &:hover
             color: rgb(0, 0, 0)
             text-decoration: underline
+
+
+.searchpage
+    @include sm-breakpoint
+        min-width: 40rem
+        max-width: 40rem
+        border: 1px solid rgb(0, 0, 0)
+
+    
 
 
 .Content_Container
@@ -81,7 +91,7 @@
             h3
                 font-size: 1.1rem
                 font-weight: 400
-                margin: 1rem 0
+                margin: 2rem 0
                 color: rgb(0, 0, 0)
                 @include xs-breakpoint
                     text-align: center
@@ -95,7 +105,7 @@
                 
                 li
                     margin: 0.8rem 0
-                    font-size: 0.9rem
+                    font-size: 0.8rem
                     cursor: pointer
                    
                     
