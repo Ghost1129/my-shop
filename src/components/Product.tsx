@@ -24,7 +24,7 @@ const Product = ({item}:ProductProps) => {
       return () => {
         ctx.revert()
       }
-    }, [])
+    }, [item])
 
   return (
     <div key={item.id} ref={Image} className='product_container'>
