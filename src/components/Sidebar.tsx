@@ -2,14 +2,20 @@ import React from 'react'
 import Accordian from './Accordian'
 import '../scss/components/_sidebar.sass'
 
-const Sidebar = () => {
+interface SidebarProps {
+  min: React.Dispatch<React.SetStateAction<number>>;
+  max: React.Dispatch<React.SetStateAction<number>>;
+  rate: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const Sidebar = ({min,max,rate}:SidebarProps) => {
   return (
     <aside className='Sidebar_Container'>
         <div>
           <h3>Search Results</h3>
-          <Accordian type="brand"  />
-          <Accordian type="price" />
-          <Accordian type="rating" />
+          <Accordian min={min} max={max} rate={rate} type="brand"  />
+          <Accordian min={min} max={max} rate={rate} type="price" />
+          <Accordian min={min} max={max} rate={rate} type="rating" />
 
 
         </div>

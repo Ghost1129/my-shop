@@ -7,18 +7,22 @@ import img1 from '../assets/t1.jpeg'
 import usefetchData from '../utils/usefetchData'
 import Product from './Product'
 
+interface SearchContentProps {
+  min: number;
+  max: number;
+  rate: number;
+}
 
-const SearchContent = () => {
+
+const SearchContent = ({min,max,rate}:SearchContentProps) => {
   
   const [data, setData] = useState(usefetchData())
   const [filteredData, setFilteredData] = useState(data)
-  const [min, setMin] = useState(0)
-  const [max, setMax] = useState(10000)
-  const [minrating, setminRating] = useState(5)
+  
   
   useEffect(() => {
-    setFilteredData(data.filter((item) => item.price <= max && item.price >= min && item.rating >= minrating))
-  }, [data, min, max, minrating])
+    setFilteredData(data.filter((item) => item.price <= max && item.price >= min && item.rating >= rate))
+  }, [data, min, max, rate])
  
   return (
     <main className='Content_container'>
