@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect,useState } from 'react'
 import '../scss/components/_searchcontent.sass'
 import usefetchData from '../utils/usefetchData'
 import Product from './Product'
+
 
 interface SearchContentProps {
   min: number;
@@ -10,11 +11,8 @@ interface SearchContentProps {
 }
 
 const SearchContent = ({min,max,rate}:SearchContentProps) => {
-  
   const [data] = useState(usefetchData())
   const [filteredData, setFilteredData] = useState(data)
-  
-  
   useEffect(() => {
     setFilteredData(data.filter((item) => item.price <= max && item.price >= min && item.rating >= rate))
   }, [data, min, max, rate])

@@ -6,7 +6,6 @@ import { gsap } from 'gsap'
 
 const Home = () => {
   const Container = useRef<HTMLDivElement>(null)
-
   useLayoutEffect(() => {
     const ctx = gsap.context(()=>{
       gsap.set(Container.current, {transformOrigin: 'top', scale: 0})
@@ -19,9 +18,6 @@ const Home = () => {
       ctx.revert()
     }
   }, [])
-
-
-
 
   return (
 

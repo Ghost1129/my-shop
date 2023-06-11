@@ -9,16 +9,14 @@ import { Navigate } from 'react-router-dom'
 interface Props {
     size: string
 }
-
 const Search = (props:Props) => {
     const [show, setShow] = useState(false)
     const handleSubmit = () => {
         <Navigate to='/store' />
-       
     }
     const handleHide = () => {
         setTimeout(() => {
-            setShow(false)
+        setShow(false)
         }, 1000)
     }
   return (
@@ -27,11 +25,7 @@ const Search = (props:Props) => {
             <input type="text" placeholder='Search' onSubmit={()=>handleSubmit()} />
             <span><BsSearch size={28} /></span>
         </div>
-        {
-            show && <TrendContainer />
-        }
-        
-        
+        {show && <TrendContainer />}
     </>
   )
 }

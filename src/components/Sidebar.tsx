@@ -28,8 +28,6 @@ const Sidebar = ({min,max,rate}:SidebarProps) => {
           <Accordian min={min} max={max} rate={rate} type="brand"  />
           <Accordian min={min} max={max} rate={rate} type="price" />
           <Accordian min={min} max={max} rate={rate} type="rating" />
-
-
         </div>
     </aside>
   )

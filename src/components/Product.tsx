@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import {AiOutlineHeart,AiFillHeart} from 'react-icons/ai'
 import Star from './Star'
+import { gsap } from 'gsap'
 
 interface ProductProps {
     item: {
@@ -14,8 +15,19 @@ interface ProductProps {
 
 const Product = ({item}:ProductProps) => {
     const [like, setLike] = useState(false)
+    const Image = React.useRef<HTMLImageElement>(null)
+    useLayoutEffect(() => {
+      const ctx = gsap.context(()=>{
+        const tl = gsap.timeline({defaults: {duration: 2 ,delay:1 , ease: 'power3.inOut'}})
+        tl.fromTo(Image.current, {opacity: 0}, {opacity: 1 ,stagger: 0.5})
+      }, Image)
+      return () => {
+        ctx.revert()
+      }
+    }, [])
+
   return (
-    <div key={item.id} className='product_container'>
+    <div key={item.id} ref={Image} className='product_container'>
           
               <div className='product_image'>
               {like?<>
